@@ -1,17 +1,26 @@
 	
 $( document ).ready(function() {
  		$("#oblast").chosen(); 
- 	
+ 		
 	$("#oblast").change(function(){
 		$("#city_chosen").remove();
 		$("#district_chosen").remove();
+		$('.lbl_user').remove();
 		$('#city').remove();
 		$('#district').remove();
-		$('.lbl_user').remove();
 		$('#other_select br').remove();
-		 var select=document.createElement('select');
-		 var select2=document.createElement('select');
+		$("#district3_chosen").remove();
+		$('#district3').remove();
+		$("#district2_chosen").remove();
+		$('#district2').remove();
+		document.getElementById('other_select').innerHTML = '';
 		
+
+		 var select=document.createElement('select');
+		
+		 $(select).append('<option>Выберите город</option>');
+		 var select2=document.createElement('select');
+		$(select2).append('<option>Выберите район</option>');
 		 	//$('#obl').innerHTML=txt;
 		$.post(
 
@@ -29,32 +38,32 @@ $( document ).ready(function() {
 		  for(var i=0; i<res.length;i++){
 		  	if(res[i].ter_type_id==1){
 
-		  		city(res[i].ter_name);
+		  		city(res[i].ter_name,res[i].ter_id);
 
 		  	}
 		  	if(res[i].ter_type_id==2){
-		  		district(res[i].ter_name);
+		  		district(res[i].ter_name,res[i].ter_id);
 
 		  	}
 		  	if(res[i].reg_id==85){
 		  		if(res[i].ter_type_id==3){
-		  			district(res[i].ter_name);
+		  			district(res[i].ter_name,res[i].ter_id);
 
 		  		}
 			  	if(res[i].ter_type_id==0){
-			  		city(res[i].ter_name);
+			  		city(res[i].ter_name,res[i].ter_id);
 			  	}
 		  	}
 		  	if(res[i].reg_id==80){
 		  		if(res[i].ter_type_id==3){
-					district(res[i].ter_name);
+					district(res[i].ter_name,res[i].ter_id);
 		  		}
 			  	if(res[i].ter_type_id==0){
-			  		city(res[i].ter_name);
+			  		city(res[i].ter_name,res[i].ter_id);
 			  	}
 		  	}
 		  }
-		  	$('#other_select').append('<label class="lbl_user">Выберите город</label></br></br>');
+		  	 $('#other_select').append('<label class="lbl_user">Выберите город</label></br></br>');
 		  	$('#other_select').append(select);
 		  	$('#other_select').append('</br></br><label class="lbl_user">Выберите район</label></br></br>');
 		  	$('#other_select').append(select2);
@@ -62,25 +71,33 @@ $( document ).ready(function() {
 		  	$("#district").chosen({width: "30%"}); 
 		  }
 
-		function city(res){
+		function city(res,id){
 		  	var option=document.createElement('option');
 		  		option.innerHTML=res;
-		  		$(select).append(option);
+		  		option.value=id;
+		  		select.append(option);
 		  		select.setAttribute("class","chosen-select");
 		  		select.setAttribute("id","city");
-		  		select.setAttribute("name","city");
+		  		select.setAttribute("name","district2");
+		  		select.setAttribute("onChange","result(this)");
 		}
 
-		function district(res){
+		function district(res,id){
 			var option=document.createElement('option');
 		  		option.innerHTML=res;
-		  		$(select2).append(option);
+		  		option.value=id;
+		  		select2.append(option);
 		  		select2.setAttribute("class","chosen-select");
 		  		select2.setAttribute("id","district");
-		  		select2.setAttribute("name","district");
+		  		select2.setAttribute("name","district2");
+		  		select2.setAttribute("onChange","distr(this)");
 		}
 		
+	
+
+	
 	});
+
 	$(".validation ").change(function(){
 		var Regname = new RegExp("^.*[^A-zА-яЁё ].*$");
 		var name=$("#name").val();

@@ -20,10 +20,13 @@
 <?php endforeach; ?>
 	</select><br><br>
 
-	<div id="other_select"></div> <br><br>
+	<div id="other_select">
+		
+	</div> <br><br>
 	<input type="submit" id="submit" name="submit" value="Сохранить">
 	</form>
  </section>
+
 
 
 	
