@@ -1,0 +1,21 @@
+{
+    "name": "serg/game",
+    "description": "my simple game",
+    "type": "project",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "Sergey Monastyretskiy",
+            "email": "pringls777@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "symfony/console": "^5.3"
+    }
+}
